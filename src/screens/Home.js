@@ -19,7 +19,8 @@ class Home extends React.PureComponent {
             Geolocation.getCurrentPosition(info => {
                 if (info) {
                     const { latitude, longitude } = info.coords;
-                    this.props.getWeatherData(latitude, longitude);
+                    this.props.getCurrentWeatherData(latitude, longitude);
+                    this.props.getWeeklyWeatherData(latitude, longitude);
                 }
             });
         }
@@ -41,14 +42,14 @@ class Home extends React.PureComponent {
     };
 
     render() {
-        const { hasError, isLoading, currentWeatherData, weatherData } = this.props;
+        const { hasError, isLoading, currentWeatherData, weeklyWeatherData } = this.props;
         return (
             <SafeAreaView>
                 <View style={styles.container}>
                     {!hasError ?
                         <>
                             {currentWeatherData ? <CurrentWeather currentWeatherData={currentWeatherData} /> : null}
-                            {weatherData ? <WeeklyWeather weatherData={weatherData} /> : null}
+                            {weeklyWeatherData ? <WeeklyWeather weeklyWeatherData={weeklyWeatherData} /> : null}
                         </>
                         :
                         <Error />}
@@ -61,13 +62,14 @@ class Home extends React.PureComponent {
 
 const mapStateToProps = (state) => ({
     currentWeatherData: state.weather.currentWeatherData,
-    weatherData: state.weather.weatherData,
+    weeklyWeatherData: state.weather.weeklyWeatherData,
     hasError: state.weather.hasError,
     isLoading: state.ui.isLoading
 });
 
 const mapDispatchToProps = {
-    getWeatherData: weather.getWeatherData
+    getWeeklyWeatherData: weather.getWeeklyWeatherData,
+    getCurrentWeatherData: weather.getCurrentWeatherData
 };
 
 export default connect(

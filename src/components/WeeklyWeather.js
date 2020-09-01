@@ -6,11 +6,11 @@ import date from '../utils/date';
 
 import styles from './weeklyWeather-styles';
 
-const WeeklyWeather = ({ weatherData }) => {
+const WeeklyWeather = ({ weeklyWeatherData }) => {
 
     const renderItem = ({ item }) => {
         const weekDay = date.getDay(item.dt);
-        const weather = item.temp.day;
+        const weather = item.main.temp;
         return <DailyWeather weekDay={weekDay} weather={weather} />;
     };
 
@@ -20,7 +20,7 @@ const WeeklyWeather = ({ weatherData }) => {
         <View style={styles.container}>
             <FlatList
                 showsVerticalScrollIndicator={false}
-                data={weatherData}
+                data={weeklyWeatherData}
                 ItemSeparatorComponent={renderItemSeparatorComponent}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => `${index}`}

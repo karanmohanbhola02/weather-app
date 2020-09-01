@@ -5,8 +5,8 @@ import styles from './currentWeather-styles';
 
 const CurrentWeather = ({ currentWeatherData }) => {
 
-    const weather = currentWeatherData.temp;
-    const city = '';
+    const weather = currentWeatherData.weather;
+    const city = currentWeatherData.cityName;
 
     return (
         <View style={styles.container}>
