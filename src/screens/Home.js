@@ -16,14 +16,22 @@ class Home extends React.PureComponent {
     async componentDidMount() {
         const isPermissionGranted = Platform.OS === 'android' ?  await this.requestLocationPermission() : true;
         if (isPermissionGranted) {
-            Geolocation.getCurrentPosition(info => {
-                if (info) {
-                    const { latitude, longitude } = info.coords;
-                    this.props.getCurrentWeatherData(latitude, longitude);
-                    this.props.getWeeklyWeatherData(latitude, longitude);
-                }
-            });
+            this.getCurrentPosition();
         }
+    }
+
+    getCurrentPosition = () => {
+        Geolocation.getCurrentPosition(info => {
+            if (info) {
+                const { latitude, longitude } = info.coords;
+                this.props.getCurrentWeatherData(latitude, longitude);
+                this.props.getWeeklyWeatherData(latitude, longitude);
+            }
+        });
+    }
+
+    handleRetry = () => {
+        this.getCurrentPosition();
     }
 
     requestLocationPermission = async () => {
@@ -52,7 +60,7 @@ class Home extends React.PureComponent {
                             {weeklyWeatherData ? <WeeklyWeather weeklyWeatherData={weeklyWeatherData} /> : null}
                         </>
                         :
-                        <Error />}
+                        <Error onPress={this.handleRetry} />}
                 </View>
                 <ActivityIndicator isLoaderActive={isLoading} />
             </SafeAreaView>
