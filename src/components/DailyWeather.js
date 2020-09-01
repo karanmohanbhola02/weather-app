@@ -7,7 +7,7 @@ const DailyWeather = ({ weekDay, weather }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.weekDay}>{weekDay}</Text>
-            <Text style={styles.weather}>{weather}</Text>
+            <Text style={styles.weather}>{`${weather}°`}</Text>
         </View>
     );
 };

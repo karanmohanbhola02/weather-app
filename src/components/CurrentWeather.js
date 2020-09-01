@@ -10,7 +10,7 @@ const CurrentWeather = ({ currentWeatherData }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.weather}>{weather}</Text>
+            <Text style={styles.weather}>{`${weather}°`}</Text>
             <Text style={styles.city}>{city}</Text>
         </View>
     );
