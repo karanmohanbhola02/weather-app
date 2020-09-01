@@ -4,7 +4,7 @@ import { palette } from '../theme';
 const styles = StyleSheet.create({
     container: {
         backgroundColor: palette.white,
-        flex: 2.5,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
