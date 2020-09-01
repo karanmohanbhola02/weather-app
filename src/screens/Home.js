@@ -12,19 +12,19 @@ import styles from './home-styles';
 
 class Home extends React.PureComponent {
 
-    componentDidMount () {
+    componentDidMount() {
         this.props.getWeatherData();
     }
 
     render() {
-        const { hasError, isLoading } = this.props;
+        const { hasError, isLoading, currentWeatherData, weatherData } = this.props;
         return (
-            <SafeAreaView> 
+            <SafeAreaView>
                 <View style={styles.container}>
                     {!hasError ?
                         <>
-                            <CurrentWeather weather='10' city='Delhi' />
-                            <WeeklyWeather />
+                            {currentWeatherData ? <CurrentWeather currentWeatherData={currentWeatherData} /> : null}
+                            {weatherData ? <WeeklyWeather weatherData={weatherData} /> : null}
                         </>
                         :
                         <Error />}
@@ -36,6 +36,7 @@ class Home extends React.PureComponent {
 }
 
 const mapStateToProps = (state) => ({
+    currentWeatherData: state.weather.currentWeatherData,
     weatherData: state.weather.weatherData,
     hasError: state.weather.hasError,
     isLoading: state.ui.isLoading

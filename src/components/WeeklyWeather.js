@@ -2,13 +2,16 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import DailyWeather from './DailyWeather';
 import SectionSeparator from './shared/SectionSeparator';
+import date from '../utils/date';
 
 import styles from './weeklyWeather-styles';
 
-const WeeklyWeather = ({ }) => {
+const WeeklyWeather = ({ weatherData }) => {
 
-    const renderItem = ({ }) => {
-        return <DailyWeather weekDay='Monday' weather='12' />;
+    const renderItem = ({ item }) => {
+        const weekDay = date.getDay(item.dt);
+        const weather = item.temp.day;
+        return <DailyWeather weekDay={weekDay} weather={weather} />;
     };
 
     const renderItemSeparatorComponent = () => <SectionSeparator />;
@@ -17,7 +20,7 @@ const WeeklyWeather = ({ }) => {
         <View style={styles.container}>
             <FlatList
                 showsVerticalScrollIndicator={false}
-                data={[1,2,3,4,5]}
+                data={weatherData}
                 ItemSeparatorComponent={renderItemSeparatorComponent}
                 renderItem={renderItem}
                 keyExtractor={(item, index) => `${index}`}
