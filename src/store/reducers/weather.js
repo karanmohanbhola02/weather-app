@@ -1,7 +1,8 @@
 import actions from '../constants';
 
 const initialState = {
-    weatherData: null
+    weatherData: null,
+    hasError: false
 };
 
 const weather = (state = initialState, action) => {
@@ -9,7 +10,8 @@ const weather = (state = initialState, action) => {
         case actions.GET_WEATHER_DATA:
             return {
                 ...state,
-                weatherData: action.payload
+                weatherData: action.payload,
+                hasError: !action.payload
             };
         default:
             return state;
