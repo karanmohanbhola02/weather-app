@@ -3,7 +3,7 @@ import { palette } from '../theme';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: palette.ruby,
+        backgroundColor: palette.white,
         flex: 2.5,
         alignItems: 'center',
         justifyContent: 'center'
